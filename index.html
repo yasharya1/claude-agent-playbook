@@ -452,11 +452,20 @@
         </div>
       </div>
 
+      <div class="file-block" style="margin-top: var(--space-3);">
+        <div class="file-block-head">
+          <span>example-prompt.txt</span>
+          <button class="copy-btn" data-key="cowork-example-prompt">Copy</button>
+        </div>
+        <pre><code>I have 40 win-loss interview transcripts in this folder. Split them into batches of 5, spawn one subagent per batch, and have each subagent write a one-paragraph win/loss theme summary for its batch. Save each subagent's output to a distinct file named batch-1-summary.md, batch-2-summary.md, etc. so results don't overwrite each other. When all batches are done, compile the summaries into one combined doc.</code></pre>
+      </div>
+
       <div class="note">
-        <strong>Two more things to watch for:</strong>
+        <strong>Three more things to watch for:</strong>
         <ul>
           <li>If a split works well for something you do repeatedly (interview research, Gong call batches), turn it into a Skill instead of re-explaining the batch size every time — the skill-creator skill can help.</li>
           <li>If multiple subagents will each produce a file, give each one an explicit, distinct filename up front. Left to just "save your result," they can silently overwrite each other.</li>
+          <li>Each subagent is a full request, not a free clone — a 40-way split costs roughly 40x a single request's tokens. Batch coarser (fewer, larger subagents) if you're watching usage, not finer.</li>
         </ul>
       </div>
     </div>
@@ -595,7 +604,9 @@ const coworkFiles = [
   { name: "cowork-orchestration.md", key: "cowork-rules" }
 ];
 
-const content = {};
+const content = {
+  'cowork-example-prompt': "I have 40 win-loss interview transcripts in this folder. Split them into batches of 5, spawn one subagent per batch, and have each subagent write a one-paragraph win/loss theme summary for its batch. Save each subagent's output to a distinct file named batch-1-summary.md, batch-2-summary.md, etc. so results don't overwrite each other. When all batches are done, compile the summaries into one combined doc."
+};
 
 async function renderFiles(containerId, files) {
   const container = document.getElementById(containerId);

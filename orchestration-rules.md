@@ -2,7 +2,7 @@
 
 Drop this into your project's `CLAUDE.md` (or equivalent) alongside the four agent files in `agents/`.
 
-Spawn subagents and teams aggressively when the task benefits — don't stay in the main context when a better tool exists. Agent teams are enabled via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in project settings. If agent teams silently stop working after a Claude Code update, check this flag first — it's experimental and may change.
+Spawn subagents aggressively when the task benefits — don't stay in the main context when a better tool exists. Agent teams (see below) are a separate, opt-in capability: they won't work until you set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in your own project's `.claude/settings.json` (Claude Code v2.1.178+). If they silently stop working after an update, check this flag first — it's experimental and may change.
 
 ## When to spawn subagents
 

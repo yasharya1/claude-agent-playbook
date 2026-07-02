@@ -32,12 +32,34 @@ Gong call batches), save it as a Skill so you can trigger it with one command
 instead of re-explaining the split every time — the skill-creator skill can
 help turn a recurring task into one.
 
+### A prompt you can paste as-is
+
+> I have 40 win-loss interview transcripts in this folder. Split them into
+> batches of 5, spawn one subagent per batch, and have each subagent write a
+> one-paragraph win/loss theme summary for its batch. Save each subagent's
+> output to a distinct file named `batch-1-summary.md`, `batch-2-summary.md`,
+> etc. so results don't overwrite each other. When all batches are done,
+> compile the summaries into one combined doc.
+
+Swap in your own record type, batch size, and output format — what matters is
+the structure (explicit batch size, one subagent per batch, distinct
+filenames), not the specific wording.
+
 ### Avoid output collisions
 
 If multiple subagents will each produce a file (a report, a doc, a sheet),
 give each one an explicit, distinct filename or destination up front. Left to
 just "save your result," they can silently overwrite each other if they land
 on the same default name.
+
+### Mind the token cost
+
+Each subagent is a full Claude request, not a free clone — splitting a task
+40 ways costs roughly 40x a single request's worth of tokens, not free
+parallelism. A handful of subagents for a real batch job is normal;
+reflexively splitting everything (including tasks that don't need it) adds up
+fast and can eat into a monthly usage cap. If you're watching usage, batch
+coarser (fewer, larger subagents) rather than finer.
 
 ### Tripwires — catch yourself under-delegating
 
