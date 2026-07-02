@@ -19,29 +19,49 @@
     --border: #e2e2e2;
     --mono: ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    /* type scale — a fixed set of sizes, reused everywhere instead of one-off values */
+    --text-2xl: 26px;
+    --text-lg: 16px;
+    --text-base: 14px;
+    --text-sm: 12px;
+    --text-xs: 11px;
+    --text-2xs: 10px;
+
+    /* spacing scale — multiples of 8px, plus a 4px half-step for tight label gaps */
+    --space-0: 4px;
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-5: 40px;
+    --space-6: 48px;
+    --space-7: 56px;
+    --space-8: 64px;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: var(--sans);
+    font-size: var(--text-lg);
     color: var(--ink);
     background: var(--bg);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 var(--space-3); }
 
-  /* mode toggle */
+  /* mode toggle — driven off <html data-mode>, set inline in <head> to avoid a flash of the wrong track */
   [data-for-mode] { display: none; }
-  body[data-mode="code"] [data-for-mode="code"] { display: block; }
-  body[data-mode="cowork"] [data-for-mode="cowork"] { display: block; }
+  html[data-mode="code"] [data-for-mode="code"] { display: block; }
+  html[data-mode="cowork"] [data-for-mode="cowork"] { display: block; }
 
-  .mode-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 0; }
-  .mode-bar-inner { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
-  .mode-bar-label { font-size: 12.5px; color: var(--ink-faint); font-weight: 600; }
+  .mode-bar { background: #fff; border-bottom: 1px solid var(--border); padding: var(--space-2) 0; }
+  .mode-bar-inner { display: flex; align-items: center; justify-content: center; gap: var(--space-2); flex-wrap: wrap; }
+  .mode-bar-label { font-size: var(--text-sm); color: var(--ink-faint); font-weight: 600; }
   .mode-toggle { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 999px; padding: 3px; gap: 3px; }
   .mode-btn {
-    border: none; background: transparent; padding: 8px 18px; border-radius: 999px; font-size: 12.5px;
+    border: none; background: transparent; padding: var(--space-1) var(--space-2); border-radius: 999px; font-size: var(--text-sm);
     font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; color: var(--ink);
     font-family: var(--sans);
   }
@@ -49,202 +69,194 @@
   .mode-btn:not(.active):hover { background: var(--cyan-tint); }
 
   .eyebrow {
-    display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    display: inline-block; font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.15em; color: var(--ink);
   }
 
+  .sticky-wrap { position: sticky; top: 0; z-index: 10; }
+
   header.top {
     border-bottom: 1px solid var(--border);
-    padding: 16px 0;
-    position: sticky; top: 0; background: rgba(255,255,255,0.92);
+    padding: var(--space-2) 0;
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(6px);
-    z-index: 10;
   }
   header.top .wrap { display: flex; align-items: center; justify-content: space-between; }
-  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: var(--space-2); }
   .brand img { height: 20px; width: auto; display: block; }
   .brand .divider { width: 1px; height: 18px; background: var(--border); }
-  .brand .label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .brand .label { font-size: var(--text-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
   nav a {
-    color: var(--ink-soft); text-decoration: none; font-size: 13px; margin-left: 22px;
+    color: var(--ink-soft); text-decoration: none; font-size: var(--text-base); margin-left: var(--space-3);
     font-weight: 600;
   }
   nav a:hover { color: var(--ink); }
 
-  .hero {
-    padding: 56px 0 44px; text-align: left;
-    background: linear-gradient(180deg, var(--cyan-tint) 0%, #ffffff 100%);
-    border-bottom: 1px solid var(--border);
-  }
-  .hero h1 {
-    font-size: 32px; line-height: 1.25; margin: 14px 0 14px; letter-spacing: -0.01em;
-    font-weight: 800; max-width: 700px;
-  }
-  .hero p { font-size: 16px; color: var(--ink-soft); max-width: 640px; margin: 0; }
-
-  section { padding: 60px 0; border-top: 1px solid var(--border); }
-  section h2 { font-size: 28px; margin: 10px 0 24px; letter-spacing: -0.01em; font-weight: 800; }
-  p.lede { color: var(--ink-soft); font-size: 16px; max-width: 640px; margin: 0 0 28px; }
+  section { padding: var(--space-8) 0; border-top: 1px solid var(--border); }
+  section h2 { font-size: var(--text-2xl); margin: var(--space-1) 0 var(--space-3); letter-spacing: -0.01em; font-weight: 800; }
+  p.lede { color: var(--ink-soft); font-size: var(--text-lg); max-width: 640px; margin: 0 0 var(--space-3); }
 
   /* diagram */
   .diagram { width: 100%; }
-  .diagram-caption { text-align: center; color: var(--ink-faint); font-size: 13px; margin-top: 14px; }
+  .diagram-caption { text-align: center; color: var(--ink-faint); font-size: var(--text-base); margin-top: var(--space-2); }
 
-  /* notes / callouts */
+  /* notes / callouts — used sparingly (1-2 per section, never stacked back to back) */
   .note {
-    margin-top: 18px; padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border);
-    border-left: 4px solid var(--ink-faint); background: #fafafa; font-size: 13.5px; color: var(--ink-soft);
+    margin-top: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: 10px; border: 1px solid var(--border);
+    border-left: 4px solid var(--ink-faint); background: #fafafa; font-size: var(--text-base); color: var(--ink-soft);
   }
   .note strong { color: var(--ink); }
   .note.confirm { border-left-color: var(--cyan); background: var(--cyan-tint); }
+  .note ul { margin: var(--space-1) 0 0; padding-left: 18px; }
+  .note li { margin-bottom: var(--space-0); }
+  .note li:last-child { margin-bottom: 0; }
 
   /* rules table (Cowork) */
-  .rules-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 4px; }
+  .rules-table { width: 100%; border-collapse: collapse; font-size: var(--text-base); margin-top: var(--space-0); }
   .rules-table th {
-    text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 10px 14px; border-bottom: 2px solid var(--ink); color: var(--ink);
+    text-align: left; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em;
+    padding: var(--space-2); border-bottom: 2px solid var(--ink); color: var(--ink);
   }
-  .rules-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--ink-soft); vertical-align: top; }
+  .rules-table td { padding: var(--space-2); border-bottom: 1px solid var(--border); color: var(--ink-soft); vertical-align: top; }
   .rules-table tr:last-child td { border-bottom: 1.5px solid var(--ink); }
   .rules-table td:first-child { color: var(--ink); font-weight: 600; width: 46%; }
 
   /* weak/strong split examples */
-  .split-examples { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  .split-examples { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); margin-top: var(--space-2); }
   @media (max-width: 700px) { .split-examples { grid-template-columns: 1fr; } }
-  .split-example { border-radius: 10px; padding: 16px 18px; border: 1.5px solid var(--border); background: #fafafa; }
+  .split-example { border-radius: 10px; padding: var(--space-3); border: 1.5px solid var(--border); background: #fafafa; }
   .split-example.strong { border-color: var(--ink); background: #fff; border-left: 4px solid var(--cyan); }
   .split-example .tag {
-    font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--ink-faint); margin-bottom: 8px; display: block;
+    font-size: var(--text-2xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-faint); margin-bottom: var(--space-1); display: block;
   }
   .split-example.strong .tag { color: var(--ink); }
-  .split-example p { margin: 0; font-size: 13.5px; color: var(--ink-soft); font-style: italic; }
+  .split-example p { margin: 0; font-size: var(--text-base); color: var(--ink-soft); font-style: italic; }
 
   /* agent cards */
   .agent-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-2);
   }
   .agent-card {
-    background: #fff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 22px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 12px; padding: var(--space-3);
     border-top: 4px solid var(--cyan);
   }
-  .agent-card .icon { margin-bottom: 12px; }
-  .agent-card h3 { margin: 0 0 8px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .agent-card .icon { margin-bottom: var(--space-1); }
+  .agent-card h3 { margin: 0 0 var(--space-1); font-size: var(--text-lg); text-transform: uppercase; letter-spacing: 0.04em; }
   .agent-card .model-badge {
-    display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.08em; padding: 3px 9px; border-radius: 999px; margin-bottom: 12px;
+    display: inline-block; font-size: var(--text-2xs); font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; padding: 3px 9px; border-radius: 999px; margin-bottom: var(--space-2);
     background: var(--ink); color: white;
   }
-  .agent-card p { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 12px; }
-  .agent-card .tools { font-size: 11.5px; color: var(--ink-faint); font-family: var(--mono); }
+  .agent-card p { font-size: var(--text-base); color: var(--ink-soft); margin: 0 0 var(--space-1); }
+  .agent-card .tools { font-size: var(--text-xs); color: var(--ink-faint); font-family: var(--mono); }
 
   /* timing section — the one black "moment" */
   #timing { background: var(--ink); color: #fff; border-top: none; }
   #timing h2 { color: #fff; }
   #timing p.lede { color: #cfcfcf; }
   .illustrative-tag {
-    display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #fff; background: rgba(255,255,255,0.12); padding: 5px 12px;
-    border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; margin-bottom: 22px;
+    display: inline-block; font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #fff; background: rgba(255,255,255,0.12); padding: var(--space-1) var(--space-2);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; margin-bottom: var(--space-3);
   }
-  .chart { background: #141414; border: 1px solid #2c2c2c; border-radius: 14px; padding: 28px; }
-  .chart-row { display: flex; align-items: center; margin-bottom: 18px; }
+  .chart { background: #141414; border: 1px solid #2c2c2c; border-radius: 14px; padding: var(--space-4); }
+  .chart-row { display: flex; align-items: center; margin-bottom: var(--space-2); }
   .chart-row:last-child { margin-bottom: 0; }
   .chart-label {
-    width: 90px; font-size: 11px; font-weight: 700; flex-shrink: 0; text-transform: uppercase;
+    width: 90px; font-size: var(--text-xs); font-weight: 700; flex-shrink: 0; text-transform: uppercase;
     letter-spacing: 0.08em; color: #ccc;
   }
   .chart-track { flex: 1; display: flex; gap: 3px; height: 36px; }
   .chart-seg {
     height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 600; overflow: hidden; white-space: nowrap;
+    font-size: var(--text-xs); font-weight: 600; overflow: hidden; white-space: nowrap;
   }
-  .chart-total { width: 90px; text-align: right; font-size: 13px; font-weight: 700; flex-shrink: 0; color: #fff; }
-  .chart-footnote { font-size: 12.5px; color: #a8a8a8; margin-top: 22px; padding-top: 18px; border-top: 1px dashed #333; }
-
-  .stat-callout {
-    margin-top: 24px; padding: 18px 22px; border-radius: 10px; text-align: left;
-    background: #141414; border: 1px solid #2c2c2c; border-left: 4px solid var(--cyan);
-  }
-  .stat-callout .label {
-    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--cyan); margin-bottom: 6px;
-  }
-  .stat-callout .text { font-size: 14px; color: #ccc; line-height: 1.6; }
-  .stat-callout .text strong { color: #fff; }
+  .chart-total { width: 90px; text-align: right; font-size: var(--text-base); font-weight: 700; flex-shrink: 0; color: #fff; }
+  .chart-footnote { font-size: var(--text-sm); color: #a8a8a8; margin-top: var(--space-3); padding-top: var(--space-2); border-top: 1px dashed #333; }
 
   /* decision lists */
-  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
   @media (max-width: 700px) { .decision-grid { grid-template-columns: 1fr; } }
   .decision-col {
-    border-radius: 12px; padding: 24px; border: 1.5px solid var(--ink); background: #fff;
+    border-radius: 12px; padding: var(--space-3); border: 1.5px solid var(--ink); background: #fff;
     border-left-width: 5px;
   }
   .decision-col.yes { border-left-color: var(--cyan); }
   .decision-col.no { border-left-color: var(--ink-faint); }
   .decision-col h3 {
-    margin: 0 0 16px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
-    display: flex; align-items: center; gap: 8px;
+    margin: 0 0 var(--space-2); font-size: var(--text-base); text-transform: uppercase; letter-spacing: 0.08em;
+    display: flex; align-items: center; gap: var(--space-1);
   }
-  .decision-col ul { margin: 0; padding-left: 0; list-style: none; font-size: 13.5px; }
-  .decision-col li { margin-bottom: 12px; padding-left: 22px; position: relative; }
+  .decision-col ul { margin: 0; padding-left: 0; list-style: none; font-size: var(--text-base); }
+  .decision-col li { margin-bottom: var(--space-1); padding-left: 22px; position: relative; }
   .decision-col.yes li::before { content: "✓"; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
   .decision-col.no li::before { content: "–"; position: absolute; left: 0; color: var(--ink-faint); font-weight: 700; }
 
   /* files */
-  .file-block { margin-bottom: 22px; background: #0e0e0e; border-radius: 10px; overflow: hidden; border: 1px solid #2a2a2a; }
+  .file-block { margin-bottom: var(--space-3); background: #0e0e0e; border-radius: 10px; overflow: hidden; border: 1px solid #2a2a2a; }
   .file-block-head {
-    display: flex; align-items: center; justify-content: space-between; padding: 10px 16px;
+    display: flex; align-items: center; justify-content: space-between; padding: var(--space-1) var(--space-2);
     background: #1a1a1a; border-bottom: 1px solid #2a2a2a;
   }
-  .file-block-head span { font-family: var(--mono); font-size: 12.5px; color: var(--cyan-mid); }
+  .file-block-head span { font-family: var(--mono); font-size: var(--text-sm); color: var(--cyan-mid); }
   .copy-btn {
-    font-size: 11px; padding: 5px 12px; border-radius: 6px; border: 1px solid #444;
+    font-size: var(--text-xs); padding: 5px var(--space-2); border-radius: 6px; border: 1px solid #444;
     background: transparent; color: #ddd; cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em;
   }
   .copy-btn:hover { background: #262626; border-color: var(--cyan); color: var(--cyan); }
   .file-block pre {
-    margin: 0; padding: 16px; overflow-x: auto; font-family: var(--mono); font-size: 12.5px;
+    margin: 0; padding: var(--space-2); overflow-x: auto; font-family: var(--mono); font-size: var(--text-sm);
     color: #e6e6e6; max-height: 320px;
   }
 
-  footer { padding: 44px 0; text-align: center; background: var(--ink); color: #999; font-size: 13px; }
-  footer img { height: 18px; margin-bottom: 12px; }
+  footer { padding: var(--space-6) 0; text-align: center; background: var(--ink); color: #999; font-size: var(--text-base); }
+  footer img { height: 18px; margin-bottom: var(--space-2); }
 </style>
+<script>
+(function() {
+  var mode = 'code';
+  try {
+    var urlTrack = new URLSearchParams(location.search).get('track');
+    if (urlTrack === 'code' || urlTrack === 'cowork') {
+      mode = urlTrack;
+    } else {
+      mode = localStorage.getItem('agentPlaybookMode') || 'code';
+    }
+  } catch (e) {}
+  document.documentElement.setAttribute('data-mode', mode);
+})();
+</script>
 </head>
-<body data-mode="code">
+<body>
 
-<header class="top">
-  <div class="wrap">
-    <div class="brand">
-      <img src="assets/klue-logo-black.svg" alt="Klue">
-      <div class="divider"></div>
-      <span class="label">Agent Playbook</span>
+<div class="sticky-wrap">
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <img src="assets/klue-logo-black.svg" alt="Klue">
+        <div class="divider"></div>
+        <span class="label">Agent Playbook</span>
+      </div>
+      <nav>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#files">Get The Files</a>
+        <a href="#agents">Delegating Work</a>
+        <a href="#timing">Time Impact</a>
+        <a href="#when">When To Use</a>
+      </nav>
     </div>
-    <nav>
-      <a href="#how-it-works">How It Works</a>
-      <a href="#agents">Delegating Work</a>
-      <a href="#timing">Time Impact</a>
-      <a href="#when">When To Use</a>
-      <a href="#files">Get The Files</a>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<div class="mode-bar">
-  <div class="wrap mode-bar-inner">
-    <span class="mode-bar-label">I'm using:</span>
-    <div class="mode-toggle">
-      <button class="mode-btn" data-set-mode="code">Claude Code</button>
-      <button class="mode-btn" data-set-mode="cowork">Claude Cowork (Desktop App)</button>
+  <div class="mode-bar">
+    <div class="wrap mode-bar-inner">
+      <span class="mode-bar-label">I'm using:</span>
+      <div class="mode-toggle">
+        <button class="mode-btn" data-set-mode="code">Claude Code</button>
+        <button class="mode-btn" data-set-mode="cowork">Claude Cowork (Desktop App)</button>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="hero wrap">
-  <span class="eyebrow">Klue AI Ops — Internal Reference</span>
-  <h1>Why We Split Work Across Multiple Agents</h1>
-  <p>This page explains how Klue's AI Ops team splits work across subagents — in Claude Code and in the Cowork desktop app. Pick whichever you use above to see what's actually possible, when it's worth it, and what parallelizing saves in practice.</p>
 </div>
 
 <section id="how-it-works">
@@ -359,6 +371,23 @@
   </div>
 </section>
 
+<section id="files">
+  <div class="wrap">
+    <span class="eyebrow">Get The Files</span>
+    <h2>Copy What You Need</h2>
+
+    <div data-for-mode="code">
+      <p class="lede">Copy these into <code>.claude/agents/</code> in your own project, plus the orchestration rules into your <code>CLAUDE.md</code>. All four files and the rules doc are also in the <code>agents/</code> folder of this repo.</p>
+      <div id="file-blocks-code"></div>
+    </div>
+
+    <div data-for-mode="cowork">
+      <p class="lede">Paste this straight into Cowork → Settings → Global Instructions. It's also in <code>cowork-orchestration.md</code> in this repo.</p>
+      <div id="file-blocks-cowork"></div>
+    </div>
+  </div>
+</section>
+
 <section id="agents">
   <div class="wrap">
     <span class="eyebrow">Delegating Work</span>
@@ -423,9 +452,13 @@
         </div>
       </div>
 
-      <div class="note">Once a ratio works for something you do repeatedly (interview research, Gong call batches), save it as a Skill so you can trigger it with one command instead of re-explaining the split every time — the skill-creator skill can help turn a recurring task into one.</div>
-
-      <div class="note"><strong>Avoid output collisions.</strong> If multiple subagents will each produce a file (a report, a doc, a sheet), give each one an explicit, distinct filename or destination up front. Left to just "save your result," they can silently overwrite each other if they land on the same default name.</div>
+      <div class="note">
+        <strong>Two more things to watch for:</strong>
+        <ul>
+          <li>If a split works well for something you do repeatedly (interview research, Gong call batches), turn it into a Skill instead of re-explaining the batch size every time — the skill-creator skill can help.</li>
+          <li>If multiple subagents will each produce a file, give each one an explicit, distinct filename up front. Left to just "save your result," they can silently overwrite each other.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -459,11 +492,7 @@
           <div class="chart-total">~11 min</div>
         </div>
         <div class="chart-footnote">
-          Parallel wall-clock ≈ the slowest concurrent task (build, 8m) + dispatch overhead + the review step that has to wait for the build to finish. Explorer and researcher's time is "free" here because it overlaps with the longest task. <strong style="color:#fff">Real savings depend entirely on how independent your subtasks are</strong> — if everything shares state or one step blocks the next, parallelizing buys you nothing.
-        </div>
-        <div class="stat-callout">
-          <div class="label">Takeaway</div>
-          <div class="text">In this illustrative scenario, running the independent steps in parallel cuts wall-clock time by roughly <strong>48%</strong>. That's the shape of the benefit, not a guarantee — measure your own tasks before treating it as a rule.</div>
+          Parallel wall-clock ≈ the slowest concurrent task (build, 8m) + dispatch overhead + the review step that has to wait for the build to finish. Explorer and researcher's time is "free" here because it overlaps with the longest task. <strong style="color:#fff">Real savings depend entirely on how independent your subtasks are</strong> — if everything shares state or one step blocks the next, parallelizing buys you nothing. In this scenario, running the independent steps in parallel cuts wall-clock time by roughly 48% — that's the shape of the benefit, not a guarantee; measure your own tasks before treating it as a rule.
         </div>
       </div>
     </div>
@@ -488,11 +517,7 @@
           <div class="chart-total">~17 min</div>
         </div>
         <div class="chart-footnote">
-          Parallel wall-clock ≈ the time for one batch of 5 (~15m) + dispatch overhead. <strong style="color:#fff">Real savings depend entirely on how independent your batches are</strong> — if interviews reference each other or need to be read in a fixed order, this doesn't apply.
-        </div>
-        <div class="stat-callout">
-          <div class="label">Takeaway</div>
-          <div class="text">In this illustrative scenario, splitting into fixed batches cuts wall-clock time by roughly <strong>86%</strong>. That's the shape of the benefit, not a guarantee — measure your own tasks before treating it as a rule.</div>
+          Parallel wall-clock ≈ the time for one batch of 5 (~15m) + dispatch overhead. <strong style="color:#fff">Real savings depend entirely on how independent your batches are</strong> — if interviews reference each other or need to be read in a fixed order, this doesn't apply. In this scenario, splitting into fixed batches cuts wall-clock time by roughly 86% — that's the shape of the benefit, not a guarantee; measure your own tasks before treating it as a rule.
         </div>
       </div>
     </div>
@@ -549,23 +574,6 @@
           </ul>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="files">
-  <div class="wrap">
-    <span class="eyebrow">Get The Files</span>
-    <h2>Copy What You Need</h2>
-
-    <div data-for-mode="code">
-      <p class="lede">Copy these into <code>.claude/agents/</code> in your own project, plus the orchestration rules into your <code>CLAUDE.md</code>. All four files and the rules doc are also in the <code>agents/</code> folder of this repo.</p>
-      <div id="file-blocks-code"></div>
-    </div>
-
-    <div data-for-mode="cowork">
-      <p class="lede">Paste this straight into Cowork → Settings → Global Instructions. It's also in <code>cowork-orchestration.md</code> in this repo.</p>
-      <div id="file-blocks-cowork"></div>
     </div>
   </div>
 </section>
@@ -631,19 +639,25 @@ async function loadAll() {
   });
 }
 
-function setMode(mode) {
-  document.body.setAttribute('data-mode', mode);
+function setMode(mode, opts) {
+  document.documentElement.setAttribute('data-mode', mode);
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.setMode === mode));
   try { localStorage.setItem('agentPlaybookMode', mode); } catch (e) {}
+  if (opts && opts.updateUrl) {
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set('track', mode);
+      history.replaceState(null, '', url);
+    } catch (e) {}
+  }
 }
 
 document.querySelectorAll('.mode-btn').forEach(b => {
-  b.addEventListener('click', () => setMode(b.dataset.setMode));
+  b.addEventListener('click', () => setMode(b.dataset.setMode, { updateUrl: true }));
 });
 
-let initialMode = 'code';
-try { initialMode = localStorage.getItem('agentPlaybookMode') || 'code'; } catch (e) {}
-setMode(initialMode);
+// sync the active-button state with whatever the head script already applied — no re-fetch, no flash
+setMode(document.documentElement.getAttribute('data-mode') || 'code');
 
 loadAll();
 </script>
