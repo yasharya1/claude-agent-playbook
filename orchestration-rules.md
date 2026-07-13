@@ -35,6 +35,10 @@ Use teams when agents need to coordinate mid-task — not just fan out and colle
 - Long sustained work where a subagent would exhaust its context (teams have auto-compaction)
 - Tasks with 2+ phases requiring back-and-forth between specialists
 
+## Mind what you hand off
+
+A subagent's prompt and any files it reads become part of its own context. Don't route customer PII, credentials, or anything sensitive into scaffolding you haven't reviewed — scope tool access (read-only agents like `explorer`/`reviewer`) rather than defaulting every agent to full file access.
+
 ## When NOT to spawn
 
 - Simple edits to 1–3 known files
@@ -45,3 +49,7 @@ Use teams when agents need to coordinate mid-task — not just fan out and colle
 ## Nesting limit
 
 Hard cap at 5 levels. Don't build agent chains deeper than 3 in practice.
+
+## Escape hatch
+
+None of this is a mandate. If delegating is making a task slower, more confusing, or producing worse output than just doing it yourself — stop, drop back to doing it directly, and move on.

@@ -266,14 +266,13 @@
 
     <div data-for-mode="code">
       <p class="lede">Instead of one agent reading, researching, building, and reviewing in sequence inside a single context window, the main agent delegates each concern to a specialist and collects the results.</p>
-      <svg class="diagram" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+      <svg class="diagram" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
         <rect x="370" y="10" width="160" height="52" rx="10" fill="#000000"/>
         <text x="450" y="42" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="#ffffff">MAIN AGENT</text>
 
         <path d="M450,62 L450,90 L115,90 L115,118" fill="none" stroke="#d6d6d6" stroke-width="1.5"/>
         <path d="M450,62 L450,90 L318,90 L318,118" fill="none" stroke="#d6d6d6" stroke-width="1.5"/>
         <path d="M450,62 L450,90 L521,90 L521,118" fill="none" stroke="#d6d6d6" stroke-width="1.5"/>
-        <path d="M450,62 L450,90 L724,90 L724,118" fill="none" stroke="#d6d6d6" stroke-width="1.5"/>
 
         <g>
           <rect x="35" y="120" width="160" height="60" rx="10" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
@@ -293,22 +292,25 @@
           <text x="521" y="148" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12.5" font-weight="700" fill="#000000">BUILDER</text>
           <text x="521" y="166" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#666">writes code</text>
         </g>
+
+        <path d="M521,180 L521,208" fill="none" stroke="#000000" stroke-width="1.5"/>
+        <text x="533" y="198" text-anchor="start" font-family="ui-monospace,monospace" font-size="9" fill="#767676">after builder finishes</text>
+
         <g>
-          <rect x="644" y="120" width="160" height="60" rx="10" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
-          <rect x="644" y="120" width="160" height="4" rx="2" fill="#00CCFF"/>
-          <text x="724" y="148" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12.5" font-weight="700" fill="#000000">REVIEWER</text>
-          <text x="724" y="166" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#666">checks the diff</text>
+          <rect x="441" y="210" width="160" height="60" rx="10" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+          <rect x="441" y="210" width="160" height="4" rx="2" fill="#B17DFF"/>
+          <text x="521" y="238" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12.5" font-weight="700" fill="#000000">REVIEWER</text>
+          <text x="521" y="256" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#666">checks the diff</text>
         </g>
 
-        <path d="M115,180 L450,260" fill="none" stroke="#d6d6d6" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <path d="M318,180 L450,260" fill="none" stroke="#d6d6d6" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <path d="M521,180 L450,260" fill="none" stroke="#d6d6d6" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <path d="M724,180 L450,260" fill="none" stroke="#d6d6d6" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M115,180 L450,300" fill="none" stroke="#d6d6d6" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M318,180 L450,300" fill="none" stroke="#d6d6d6" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M521,270 L450,300" fill="none" stroke="#d6d6d6" stroke-width="1.5" stroke-dasharray="4 3"/>
 
-        <rect x="340" y="260" width="220" height="50" rx="10" fill="#00CCFF"/>
-        <text x="450" y="290" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12.5" font-weight="700" fill="#000000">RESULT, BACK IN MAIN CONTEXT</text>
+        <rect x="340" y="300" width="220" height="50" rx="10" fill="#00CCFF"/>
+        <text x="450" y="330" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12.5" font-weight="700" fill="#000000">RESULT, BACK IN MAIN CONTEXT</text>
       </svg>
-      <p class="diagram-caption">Each specialist keeps its own context window — the noisy intermediate work (grep output, doc fetches, file diffs) never pollutes the main conversation.</p>
+      <p class="diagram-caption">Explorer, Researcher, and Builder run concurrently — none of them depend on each other. Reviewer runs after, because it needs Builder's diff to check. Each specialist keeps its own context window — the noisy intermediate work (grep output, doc fetches, file diffs) never pollutes the main conversation.</p>
     </div>
 
     <div data-for-mode="cowork">
@@ -415,7 +417,7 @@
           <span class="model-badge">Sonnet</span>
           <h3>Builder</h3>
           <p>Scoped implementation work. Executes a self-contained task fully, documents assumptions, flags blockers instead of guessing.</p>
-          <div class="tools">Read · Edit · Write · Bash</div>
+          <div class="tools">Read · Edit · Write · Bash · Glob · Grep</div>
         </div>
         <div class="agent-card">
           <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
@@ -425,6 +427,7 @@
           <div class="tools">Read · Grep · Bash · Glob</div>
         </div>
       </div>
+      <div class="note" style="margin-top: var(--space-3);"><strong>Mind what you hand off.</strong> A subagent's prompt and any files it reads become part of its own context — don't route customer PII, credentials, or anything sensitive into scaffolding you haven't reviewed. Scope tool access (read-only agents like <code>explorer</code>/<code>reviewer</code>) rather than defaulting every agent to full file access.</div>
     </div>
 
     <div data-for-mode="cowork">
@@ -466,6 +469,7 @@
           <li>If a split works well for something you do repeatedly (interview research, Gong call batches), turn it into a Skill instead of re-explaining the batch size every time — the skill-creator skill can help.</li>
           <li>If multiple subagents will each produce a file, give each one an explicit, distinct filename up front. Left to just "save your result," they can silently overwrite each other.</li>
           <li>Each subagent is a full request, not a free clone — a 40-way split costs roughly 40x a single request's tokens. Batch coarser (fewer, larger subagents) if you're watching usage, not finer.</li>
+          <li>Subagents pull real customer or account data into their own context the moment you point them at it — don't hand off anything sensitive (PII, credentials, deal terms) to a subagent whose output you haven't scoped or reviewed.</li>
         </ul>
       </div>
     </div>
@@ -561,6 +565,7 @@
           </ul>
         </div>
       </div>
+      <div class="note" style="margin-top: var(--space-3);"><strong>Escape hatch:</strong> none of this is a mandate. If delegating is making a task slower, more confusing, or producing worse output than just doing it yourself, stop and do it directly.</div>
     </div>
 
     <div data-for-mode="cowork">
@@ -579,10 +584,11 @@
           <ul>
             <li>Agent-to-agent messaging — subagents report only to you, never to each other</li>
             <li>Real-time coordination mid-task — no live back-and-forth between workers</li>
-            <li>That's a Claude Code-only capability ("agent teams") — treat it as a hard limit here, not something to work around</li>
+            <li>There's no way to work around this — treat it as a hard limit, not something to route around with cleverer prompting</li>
           </ul>
         </div>
       </div>
+      <div class="note" style="margin-top: var(--space-3);"><strong>Escape hatch:</strong> none of this is a mandate. If splitting the work is making things slower or more confusing than just doing it directly, stop and do it directly.</div>
     </div>
   </div>
 </section>

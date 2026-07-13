@@ -52,6 +52,13 @@ give each one an explicit, distinct filename or destination up front. Left to
 just "save your result," they can silently overwrite each other if they land
 on the same default name.
 
+### Mind what you hand off
+
+A subagent's prompt and any records it reads become part of its own context.
+Don't route customer PII, credentials, or anything sensitive into a subagent
+whose output you haven't scoped or reviewed — splitting the work doesn't
+change what counts as safe to hand to a model.
+
 ### Mind the token cost
 
 Each subagent is a full Claude request, not a free clone — splitting a task
@@ -72,6 +79,10 @@ Split the work when you notice:
 
 Subagents report only to you — there's no agent-to-agent messaging and no
 real-time coordination between them. If a task genuinely needs agents to talk
-to each other mid-task rather than just report back, Cowork can't do that —
-that's a Claude Code-only capability. Don't try to work around it — treat it
-as a hard limit.
+to each other mid-task rather than just report back, Cowork can't do that.
+Don't try to work around it — treat it as a hard limit.
+
+### Escape hatch
+
+None of this is a mandate. If splitting the work is making things slower or
+more confusing than just doing it directly, stop and do it directly.
