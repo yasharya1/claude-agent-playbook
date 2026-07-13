@@ -32,8 +32,28 @@ Gong call batches), save it as a Skill so you can trigger it with one command
 instead of re-explaining the split every time — the skill-creator skill can
 help turn a recurring task into one.
 
-### A prompt you can paste as-is
+### Prompts you can paste as-is, by team
 
+**CSM:**
+> I have 15 customer accounts renewing this quarter. Pull the health score
+> and last QBR date for each one, split the accounts across subagents in
+> batches of 5, and have each subagent build its slice of a summary table.
+> Compile all the slices into one table when they're done.
+
+**Sales:**
+> Go through these 20 AE Gong calls from this week. Split them into batches
+> of 5, spawn one subagent per batch, and have each subagent write a
+> one-paragraph objections summary per call in its batch. Save each batch's
+> output to a distinct file (`batch-1-objections.md`, etc.), then compile
+> them into one combined doc.
+
+**Finance / RevOps:**
+> These 12 deals have been sitting in the same pipeline stage for 30+ days.
+> Split them across subagents in batches of 4, and have each subagent write
+> a one-line risk note per deal, flagging anything over 60 days. Compile all
+> the notes into one table when every batch is done.
+
+**Win-loss / CS research:**
 > I have 40 win-loss interview transcripts in this folder. Split them into
 > batches of 5, spawn one subagent per batch, and have each subagent write a
 > one-paragraph win/loss theme summary for its batch. Save each subagent's
@@ -74,6 +94,17 @@ Split the work when you notice:
 - You're about to look up or summarize the 4th+ similar record in a row one at a time
 - A request contains "each," "every," or "all N" and N is more than a handful
 - You're drafting the same type of output (summary, outreach email, brief) repeatedly in sequence
+
+### When not to split
+
+Splitting isn't free, and not every task benefits from it:
+- Fewer than ~4-5 similar items — the batching overhead costs more time than doing it directly
+- One deep task on a single document — there's nothing to divide
+- Anything sequential, where step 2 needs step 1's output — subagents can't hand off mid-task
+- The whole task takes under 5 minutes done directly
+
+If in doubt, do the first couple of items yourself before deciding whether the
+rest are worth splitting — you'll have a real time estimate instead of a guess.
 
 ### What this can't do
 

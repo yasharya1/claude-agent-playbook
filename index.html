@@ -455,9 +455,35 @@
         </div>
       </div>
 
-      <div class="file-block" style="margin-top: var(--space-3);">
+      <p class="lede" style="margin-top: var(--space-3); margin-bottom: var(--space-1);">Pick the one closest to your team, or use it as a template:</p>
+
+      <div class="file-block" style="margin-top: var(--space-2);">
         <div class="file-block-head">
-          <span>example-prompt.txt</span>
+          <span>csm-example-prompt.txt</span>
+          <button class="copy-btn" data-key="cowork-example-csm">Copy</button>
+        </div>
+        <pre><code>I have 15 customer accounts renewing this quarter. Pull the health score and last QBR date for each one, split the accounts across subagents in batches of 5, and have each subagent build its slice of a summary table. Compile all the slices into one table when they're done.</code></pre>
+      </div>
+
+      <div class="file-block">
+        <div class="file-block-head">
+          <span>sales-example-prompt.txt</span>
+          <button class="copy-btn" data-key="cowork-example-sales">Copy</button>
+        </div>
+        <pre><code>Go through these 20 AE Gong calls from this week. Split them into batches of 5, spawn one subagent per batch, and have each subagent write a one-paragraph objections summary per call in its batch. Save each batch's output to a distinct file (batch-1-objections.md, etc.), then compile them into one combined doc.</code></pre>
+      </div>
+
+      <div class="file-block">
+        <div class="file-block-head">
+          <span>finance-example-prompt.txt</span>
+          <button class="copy-btn" data-key="cowork-example-finance">Copy</button>
+        </div>
+        <pre><code>These 12 deals have been sitting in the same pipeline stage for 30+ days. Split them across subagents in batches of 4, and have each subagent write a one-line risk note per deal, flagging anything over 60 days. Compile all the notes into one table when every batch is done.</code></pre>
+      </div>
+
+      <div class="file-block">
+        <div class="file-block-head">
+          <span>win-loss-example-prompt.txt</span>
           <button class="copy-btn" data-key="cowork-example-prompt">Copy</button>
         </div>
         <pre><code>I have 40 win-loss interview transcripts in this folder. Split them into batches of 5, spawn one subagent per batch, and have each subagent write a one-paragraph win/loss theme summary for its batch. Save each subagent's output to a distinct file named batch-1-summary.md, batch-2-summary.md, etc. so results don't overwrite each other. When all batches are done, compile the summaries into one combined doc.</code></pre>
@@ -580,14 +606,16 @@
           </ul>
         </div>
         <div class="decision-col no">
-          <h3>What This Can't Do</h3>
+          <h3>Skip Splitting When</h3>
           <ul>
-            <li>Agent-to-agent messaging — subagents report only to you, never to each other</li>
-            <li>Real-time coordination mid-task — no live back-and-forth between workers</li>
-            <li>There's no way to work around this — treat it as a hard limit, not something to route around with cleverer prompting</li>
+            <li>Fewer than ~4-5 similar items — batching overhead costs more time than doing it directly</li>
+            <li>One deep task on a single document — there's nothing to divide</li>
+            <li>Anything sequential, where step 2 needs step 1's output</li>
+            <li>The whole task takes under 5 minutes done directly</li>
           </ul>
         </div>
       </div>
+      <div class="note" style="margin-top: var(--space-3);"><strong>What subagents flatly can't do, no matter how you split it:</strong> agent-to-agent messaging and real-time coordination mid-task — subagents report only to you, never to each other. There's no way to work around this.</div>
       <div class="note" style="margin-top: var(--space-3);"><strong>Escape hatch:</strong> none of this is a mandate. If splitting the work is making things slower or more confusing than just doing it directly, stop and do it directly.</div>
     </div>
   </div>
@@ -611,7 +639,10 @@ const coworkFiles = [
 ];
 
 const content = {
-  'cowork-example-prompt': "I have 40 win-loss interview transcripts in this folder. Split them into batches of 5, spawn one subagent per batch, and have each subagent write a one-paragraph win/loss theme summary for its batch. Save each subagent's output to a distinct file named batch-1-summary.md, batch-2-summary.md, etc. so results don't overwrite each other. When all batches are done, compile the summaries into one combined doc."
+  'cowork-example-prompt': "I have 40 win-loss interview transcripts in this folder. Split them into batches of 5, spawn one subagent per batch, and have each subagent write a one-paragraph win/loss theme summary for its batch. Save each subagent's output to a distinct file named batch-1-summary.md, batch-2-summary.md, etc. so results don't overwrite each other. When all batches are done, compile the summaries into one combined doc.",
+  'cowork-example-csm': "I have 15 customer accounts renewing this quarter. Pull the health score and last QBR date for each one, split the accounts across subagents in batches of 5, and have each subagent build its slice of a summary table. Compile all the slices into one table when they're done.",
+  'cowork-example-sales': "Go through these 20 AE Gong calls from this week. Split them into batches of 5, spawn one subagent per batch, and have each subagent write a one-paragraph objections summary per call in its batch. Save each batch's output to a distinct file (batch-1-objections.md, etc.), then compile them into one combined doc.",
+  'cowork-example-finance': "These 12 deals have been sitting in the same pipeline stage for 30+ days. Split them across subagents in batches of 4, and have each subagent write a one-line risk note per deal, flagging anything over 60 days. Compile all the notes into one table when every batch is done."
 };
 
 async function renderFiles(containerId, files) {
